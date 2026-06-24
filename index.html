@@ -1,37 +1,685 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopLens V4</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ShopLens V3 • Find Anything You See</title>
+
+  <meta name="description"
+    content="AI-powered visual shopping platform. Upload a screenshot, identify products, compare prices and buy instantly.">
+
+  <meta name="theme-color" content="#6d28d9">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div id="glowing-orb"></div>
 
-    <nav class="navbar">
-        <a href="index.html" class="logo">◎ ShopLens</a>
-        <div class="desktop-nav">
-            <a href="index.html" class="active">Home</a>
-            <a href="search.html">AI Search</a>
-            <a href="trending.html">Trending</a>
-            <a href="assistant.html">Assistant</a>
-        </div>
-        <div class="nav-actions">
-            <button class="theme-btn" onclick="toggleTheme()">🌙</button>
-            <button id="menu-toggle" class="menu-btn">☰</button>
-        </div>
-    </nav>
+<div id="authOverlay" class="auth-overlay">
 
-    <main>
-        <section class="hero">
-            <h1>Find anything you see.</h1>
-            <p>Experience the next generation of AI shopping.</p>
-            <button id="scan-trigger" class="primary-btn">Scan Product</button>
-        </section>
-    </main>
+<div class="auth-card">
 
-    <input type="file" id="filePicker" accept="image/*" hidden>
-    <script src="script.js"></script>
+<h2>Welcome to ShopLens</h2>
+
+<p>Login, create an account or continue as guest.</p>
+
+<input
+type="email"
+id="email"
+placeholder="Email">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<button class="login-btn" onclick="login()">
+Login
+</button>
+
+<button class="signup-btn" onclick="signup()">
+Create Account
+</button>
+
+<button class="guest-btn" onclick="guest()">
+Continue as Guest
+</button>
+
+<p id="msg"></p>
+
+</div>
+
+</div>
+
+<div class="sparkle s1">✦</div>
+<div class="sparkle s2">✦</div>
+<div class="sparkle s3">+</div>
+<div class="sparkle s4">✦</div>
+
+<header>
+
+<nav class="navbar">
+
+<a href="index.html" class="logo">
+
+<span class="logo-icon">◎</span>
+
+<span class="logo-text">
+
+ShopLens
+
+</span>
+
+</a>
+
+<div class="desktop-nav">
+
+<a href="index.html" class="active">
+Home
+</a>
+
+<a href="search.html">
+AI Search
+</a>
+
+<a href="trending.html">
+Trending
+</a>
+
+<a href="assistant.html">
+Assistant
+</a>
+
+<a href="about.html">
+About
+</a>
+
+</div>
+
+<div class="nav-actions">
+
+<button
+class="theme-btn"
+onclick="toggleTheme()">
+
+🌙
+
+</button>
+
+<button
+class="menu-btn"
+id="menuBtn">
+
+☰
+
+</button>
+
+</div>
+
+</nav>
+
+</header>
+
+<div
+class="drawer-backdrop"
+id="drawerBackdrop">
+
+</div>
+
+<aside
+class="mobile-drawer"
+id="mobileDrawer">
+
+<div class="drawer-top">
+
+<h2>
+
+ShopLens
+
+</h2>
+
+<button
+id="closeDrawer">
+
+✕
+
+</button>
+
+</div>
+
+<a href="index.html">
+
+🏠 Home
+
+</a>
+
+<a href="search.html">
+
+🔍 AI Search
+
+</a>
+
+<a href="trending.html">
+
+🔥 Trending
+
+</a>
+
+<a href="assistant.html">
+
+🤖 Assistant
+
+</a>
+
+<a href="about.html">
+
+ℹ About
+
+</a>
+
+<hr>
+
+<button
+class="drawer-theme"
+onclick="toggleTheme()">
+
+🌙 Toggle Theme
+
+</button>
+
+</aside>
+
+<main>
+
+<section class="hero">
+
+<div class="hero-left">
+
+<div class="hero-badge">
+
+✨ Powered by Groq AI
+
+</div>
+
+<h1>
+
+Find anything
+
+you see
+
+<span>
+
+with AI
+
+</span>
+
+</h1>
+
+<p>
+
+Upload any screenshot or image.
+
+ShopLens identifies products,
+
+compares prices,
+
+and helps you buy instantly.
+
+</p>
+
+<div class="hero-buttons">
+
+<button
+id="scanTrigger"
+class="primary-btn">
+
+📷 Scan Product
+
+</button>
+
+<a
+href="search.html"
+class="secondary-btn">
+
+AI Search →
+
+</a>
+
+</div>
+<div class="hero-right">
+
+<div class="orb-wrap">
+
+<div class="orb">
+
+<div class="bubble b1"></div>
+<div class="bubble b2"></div>
+<div class="bubble b3"></div>
+<div class="bubble b4"></div>
+<div class="bubble b5"></div>
+<div class="bubble b6"></div>
+
+<div class="web w1"></div>
+<div class="web w2"></div>
+<div class="web w3"></div>
+
+<div class="shine"></div>
+
+</div>
+
+<div class="ring-wrap">
+
+<div class="orb-ring r1"></div>
+<div class="orb-ring r2"></div>
+
+</div>
+
+<div class="gdot gd1"></div>
+<div class="gdot gd2"></div>
+<div class="gdot gd3"></div>
+
+<div class="platform"></div>
+<div class="plat-shadow"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="stats">
+
+<div class="stat-card">
+
+<h2>100K+</h2>
+
+<p>Products Indexed</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>98%</h2>
+
+<p>AI Accuracy</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>250+</h2>
+
+<p>Shopping Stores</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>24/7</h2>
+
+<p>AI Assistant</p>
+
+</div>
+
+</section>
+
+<section class="features">
+
+<div class="section-title">
+
+<h2>
+
+Why ShopLens?
+
+</h2>
+
+<p>
+
+AI shopping made effortless.
+
+</p>
+
+</div>
+
+<div class="feature-grid">
+
+<div class="feature-card">
+
+<div class="feature-icon purple">
+
+🔍
+
+</div>
+
+<h3>
+
+Identify
+
+</h3>
+
+<p>
+
+Upload any screenshot and our AI instantly recognizes products.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<div class="feature-icon blue">
+
+💰
+
+</div>
+
+<h3>
+
+Compare Prices
+
+</h3>
+
+<p>
+
+Compare prices from multiple trusted online stores.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<div class="feature-icon green">
+
+🛒
+
+</div>
+
+<h3>
+
+Buy Smart
+
+</h3>
+
+<p>
+
+Purchase directly from verified retailers with one click.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<div class="feature-icon orange">
+
+🤖
+
+</div>
+
+<h3>
+
+AI Assistant
+
+</h3>
+
+<p>
+
+Ask questions about products, brands and recommendations.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="trending-preview">
+
+<div class="section-title">
+
+<h2>
+
+🔥 Trending Now
+
+</h2>
+
+<p>
+
+Most searched products today.
+
+</p>
+
+</div>
+
+<div class="product-grid">
+
+<div class="product-card">
+
+<img src="images/shoe.jpg" alt="Sneakers">
+
+<h3>Nike Air Max</h3>
+
+<p>From ₹7,999</p>
+
+<a href="trending.html">
+
+View Product →
+
+</a>
+
+</div>
+
+<div class="product-card">
+
+<img src="images/watch.jpg" alt="Watch">
+
+<h3>Apple Watch</h3>
+
+<p>From ₹39,999</p>
+
+<a href="trending.html">
+
+View Product →
+
+</a>
+
+</div>
+
+<div class="product-card">
+
+<img src="images/headphone.jpg" alt="Headphones">
+
+<h3>Sony WH-1000XM5</h3>
+
+<p>From ₹24,999</p>
+
+<a href="trending.html">
+
+View Product →
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+<footer class="footer">
+
+<div class="footer-top">
+
+<div class="footer-brand">
+
+<h2>ShopLens</h2>
+
+<p>
+
+Find anything you see using AI.
+
+Powered by Groq AI & SerpAPI.
+
+</p>
+
+</div>
+
+<div class="footer-links">
+
+<h3>Explore</h3>
+
+<a href="index.html">Home</a>
+<a href="search.html">AI Search</a>
+<a href="trending.html">Trending</a>
+<a href="assistant.html">Assistant</a>
+<a href="about.html">About</a>
+
+</div>
+
+<div class="footer-links">
+
+<h3>Categories</h3>
+
+<a href="trending.html#men">Men</a>
+<a href="trending.html#women">Women</a>
+<a href="trending.html#kids">Kids</a>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>
+
+© 2026 ShopLens V3 • Built by Karan Cheema
+
+</p>
+
+</div>
+
+</footer>
+
+</main>
+
+<input
+type="file"
+id="filePicker"
+accept="image/*"
+hidden>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL="https://udpfyqxmfbjndheshfme.supabase.co/rest/v1/";
+
+const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVkcGZ5cXhtZmJqbmRoZXNoZm1lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMDY1NjMsImV4cCI6MjA5Nzc4MjU2M30.9g5CnbRzPPMXXucBgcl6CgIQOLH4d0Mp-HVp8zuC_uc";
+
+const client=supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+async function login(){
+
+const email=document.getElementById("email").value;
+
+const password=document.getElementById("password").value;
+
+const {error}=await client.auth.signInWithPassword({
+email,
+password
+});
+
+document.getElementById("msg").textContent=
+error?error.message:"Logged in successfully";
+
+if(!error){
+document.getElementById("authOverlay").style.display="none";
+}
+
+}
+
+async function signup(){
+
+const email=document.getElementById("email").value;
+
+const password=document.getElementById("password").value;
+
+const {error}=await client.auth.signUp({
+email,
+password
+});
+
+document.getElementById("msg").textContent=
+error?error.message:"Account created successfully";
+
+}
+
+function guest(){
+
+localStorage.setItem("guest","true");
+
+document.getElementById("authOverlay").style.display="none";
+
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+const menuBtn=document.getElementById("menuBtn");
+
+const drawer=document.getElementById("mobileDrawer");
+
+const backdrop=document.getElementById("drawerBackdrop");
+
+const closeBtn=document.getElementById("closeDrawer");
+
+menuBtn?.addEventListener("click",()=>{
+
+drawer.classList.add("open");
+
+backdrop.classList.add("show");
+
+});
+
+closeBtn?.addEventListener("click",()=>{
+
+drawer.classList.remove("open");
+
+backdrop.classList.remove("show");
+
+});
+
+backdrop?.addEventListener("click",()=>{
+
+drawer.classList.remove("open");
+
+backdrop.classList.remove("show");
+
+});
+
+document.getElementById("scanTrigger")?.addEventListener("click",()=>{
+
+document.getElementById("filePicker").click();
+
+});
+
+});
+
+</script>
+
+<script src="script.js"></script>
+
 </body>
+
 </html>
