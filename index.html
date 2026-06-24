@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,17 +10,28 @@
     <div id="glowing-orb"></div>
 
     <nav class="navbar">
-        <div class="logo">ShopLens</div>
-        <button id="menu-toggle">☰</button>
+        <a href="index.html" class="logo">◎ ShopLens</a>
+        <div class="desktop-nav">
+            <a href="index.html" class="active">Home</a>
+            <a href="search.html">AI Search</a>
+            <a href="trending.html">Trending</a>
+            <a href="assistant.html">Assistant</a>
+        </div>
+        <div class="nav-actions">
+            <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+            <button id="menu-toggle" class="menu-btn">☰</button>
+        </div>
     </nav>
 
     <main>
         <section class="hero">
             <h1>Find anything you see.</h1>
+            <p>Experience the next generation of AI shopping.</p>
             <button id="scan-trigger" class="primary-btn">Scan Product</button>
         </section>
     </main>
 
+    <input type="file" id="filePicker" accept="image/*" hidden>
     <script src="script.js"></script>
 </body>
 </html>
